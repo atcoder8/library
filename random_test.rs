@@ -49,14 +49,14 @@ Wrong Answer on Test #{}
     }
 
     /// Generate test cases.
-    fn generator() -> Input {
-        // let rng = rand::thread_rng();
+    pub fn generator() -> Input {
+        // let mut rng = rand::thread_rng();
 
         Input()
     }
 
     /// Returns the correct answer.
-    fn jury(input: Input) -> Output {
+    pub fn jury(input: Input) -> Output {
         // Unpacking input.
         let Input() = input;
 

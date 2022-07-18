@@ -1,7 +1,8 @@
-/// Module for testing
-pub mod random_test {
-    use std::io::{self, Write};
+fn main() {}
 
+/// Module for testing
+#[cfg(test)]
+mod random_test {
     /// Tuple of input data
     #[derive(Debug, Clone)]
     pub struct Input();
@@ -11,8 +12,8 @@ pub mod random_test {
     pub struct Output();
 
     /// Perform the specified number of tests.
-    /// Returns true only if all tests passed.
-    pub fn test() -> bool {
+    #[test]
+    fn test() {
         const NUMBER_OF_TESTS: usize = 1000;
 
         for test_case_index in 0..NUMBER_OF_TESTS {
@@ -20,9 +21,9 @@ pub mod random_test {
             let jury_output = jury(input.clone());
             let solve_output = solve(input.clone());
 
-            if jury_output != solve_output {
-                eprint!(
-                    "\
+            assert_eq!(
+                jury_output, solve_output,
+                "\
 Wrong Answer on Test #{}
 
 [Input]
@@ -34,23 +35,14 @@ Wrong Answer on Test #{}
 [Output(Solve)]
 {:?}
 ",
-                    test_case_index, input, jury_output, solve_output
-                );
-                io::stderr().flush().unwrap();
-
-                return false;
-            }
+                test_case_index, input, jury_output, solve_output
+            );
         }
-
-        eprintln!("No problem found.");
-        io::stderr().flush().unwrap();
-
-        true
     }
 
     /// Generate test cases.
     pub fn generator() -> Input {
-        // let mut rng = rand::thread_rng();
+        // let rng = rand::thread_rng();
 
         Input()
     }

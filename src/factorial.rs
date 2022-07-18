@@ -35,8 +35,8 @@ pub mod factorial {
             self.fac[n].clone()
         }
 
-        /// Returns the number of choices when selecting `k` from n and arranging them in a row.
-        pub fn permutation(&mut self, n: usize, k: usize) -> T {
+        /// Returns the number of choices when selecting `k` from `n` and arranging them in a row.
+        pub fn permutations(&mut self, n: usize, k: usize) -> T {
             if n < k {
                 T::from(0)
             } else {
@@ -45,11 +45,24 @@ pub mod factorial {
         }
 
         /// Returns the number of choices to select `k` from `n`.
-        pub fn combination(&mut self, n: usize, k: usize) -> T {
+        pub fn combinations(&mut self, n: usize, k: usize) -> T {
             if n < k {
                 T::from(0)
             } else {
                 self.factorial(n) / (self.factorial(k) * self.factorial(n - k))
+            }
+        }
+
+        /// Calculate the number of cases when sample of `k` elements from a set of `n` elements, allowing for duplicates.
+        pub fn combinations_with_repetition(&mut self, n: usize, k: usize) -> T {
+            if n == 0 {
+                if k == 0 {
+                    T::from(1)
+                } else {
+                    T::from(0)
+                }
+            } else {
+                self.combinations(n + k - 1, k)
             }
         }
     }

@@ -1,5 +1,3 @@
-fn main() {}
-
 /// Module for testing
 #[cfg(test)]
 mod random_test {
